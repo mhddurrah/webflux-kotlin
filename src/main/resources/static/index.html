@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<script>
+    $(document).ready(function () {
+        let socket = new WebSocket("ws://localhost:8080/ws/profiles");
+        socket.addEventListener('message', function (event) {
+            console.log('message from server' + event.data);
+            json = JSON.parse(event.data);
+            $('#profiles').append("<li>" + json.source.email);
+        });
+        $.getJSON('/profiles', function (data) {
+            $.each(data, function (k, v) {
+                console.log(v)
+                $('#profiles').append("<li>" + v.email);
+            })
+        })
+    });
+</script>
+
+Profiles:
+<div id="profiles">
+
+</div>
+</body>
+</html>
