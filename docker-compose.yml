@@ -4,7 +4,7 @@ services:
     image: mongo:3.2.4
     container_name: "database"
     ports:
-      - 27017:27017
+      - 27018:27017
     command: --smallfiles
   api:
     image: boot-flux
